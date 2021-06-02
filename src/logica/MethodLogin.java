@@ -13,7 +13,7 @@ public class MethodLogin{
     Person pe = new Person();
     LoginUser lg = new LoginUser();
 
-
+//metodo encargado de validar los campso al inicar sesion 
     public void loginUser(String userName,String password){
 
         pe.setUserName(userName);
@@ -23,6 +23,7 @@ public class MethodLogin{
             JOptionPane.showMessageDialog(null,"Bienvenido a su sistema Bancario");
             lg.txt_login.setBackground(new Color(255,255,255));
             lg.txt_password.setBackground(new Color(255,255,255));
+
 
 
         }else {
