@@ -19,12 +19,16 @@ public class LoginUser extends JFrame implements ActionListener {
 
     public LoginUser(){
 
+        //metodo para que los objetos se puedan mover dentro del JFrame
         setLayout(null);
         setSize(350,450);
         setResizable(false);
         setTitle("Sistema de prestamos");
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(15,55,150));
+
+        //metodo para que la aplicacion no quede ne segundo plano
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         txt_login = new JTextField("");
         txt_login.setBackground(new Color(255,255,255));
@@ -63,22 +67,14 @@ public class LoginUser extends JFrame implements ActionListener {
         MethodLogin ml = new MethodLogin();
         Person user = new Person();
 
-       // user.setUserName(txt_login.getText().trim());
-        //user.setPassword(txt_password.getText().trim());
-
         if(e.getSource() == bt_login){
-           // login_pass = txt_password.getText().toString();
-            //login_user = txt_login.getText().toString();
-          // user.setUserName(login_user);
-          // user.setPassword(login_pass);
-            System.out.println(user.getUserName());
-            System.out.println(user.getPassword());
+
             ml.loginUser(txt_login.getText().toString(), txt_password.getText().toString());
 
 
+        }if(e.getSource() == bt_createCount){
 
-
-
+            System.out.println("Crear una cuenta");
         }
 
     }
