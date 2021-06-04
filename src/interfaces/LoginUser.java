@@ -16,6 +16,8 @@ public class LoginUser extends JFrame implements ActionListener {
     String login_pass ="";
     public JButton bt_login,bt_createCount;
     public JTextField txt_login, txt_password;
+    public JLabel label_down;
+
 
     public LoginUser(){
 
@@ -51,7 +53,15 @@ public class LoginUser extends JFrame implements ActionListener {
         bt_createCount = new JButton("Registrarse");
         bt_createCount.setBounds(100,240,140,50);
         bt_createCount.setFont(new Font("Andale Mono",1,12));
+        bt_createCount.addActionListener(this);
         add(bt_createCount);
+
+        label_down = new JLabel("Todos los derechos reservados 2021");
+        label_down.setBackground(new Color(222,222,222));
+        label_down.setBounds(60,350,220,40);
+        label_down.setForeground(new Color(222,222,222));
+        label_down.setFont(new Font("Andale Mono",1,12));
+        add(label_down);
 
     }
 
@@ -73,8 +83,8 @@ public class LoginUser extends JFrame implements ActionListener {
 
 
         }if(e.getSource() == bt_createCount){
-
-            System.out.println("Crear una cuenta");
+            
+            ml.RegisterAccount();
         }
 
     }

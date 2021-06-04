@@ -52,4 +52,14 @@ public class MethodLogin{
         }
 
     }
+
+    public void RegisterAccount(){
+
+
+         new LoginUser().setVisible(false);
+         new CreateAccount().setVisible(true);
+
+
+
+    }
 }
