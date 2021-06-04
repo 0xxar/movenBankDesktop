@@ -36,12 +36,13 @@ public class LoginUser extends JFrame implements ActionListener {
         txt_login.setBackground(new Color(255,255,255));
         txt_login.setBounds(60,60,220,40);
         txt_login.setFont(new Font("Andale Mono",1,12));
+        txt_login.setHorizontalAlignment(JTextField.CENTER);
         add(txt_login);
 
         txt_password = new JTextField("");
         txt_password.setBackground(new Color(255,255,255));
         txt_password.setBounds(60,110,220,40);
-        txt_password.setFont(new Font("Andale Mono",1,12));
+        txt_password.setHorizontalAlignment(JTextField.CENTER);
         add(txt_password);
 
         bt_login = new JButton("Acceder");
@@ -83,7 +84,7 @@ public class LoginUser extends JFrame implements ActionListener {
 
 
         }if(e.getSource() == bt_createCount){
-            
+            this.dispose();
             ml.RegisterAccount();
         }
 
