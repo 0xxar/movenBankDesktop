@@ -11,7 +11,7 @@ public class MethodCreateAccount {
 
         new Person();
 
-        if(person.getFirts_Name().isEmpty()){
+        if(person.getFirts_Name().isEmpty() && person.getLast_Name().isEmpty()){
 
 
         }

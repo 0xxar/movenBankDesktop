@@ -15,7 +15,8 @@ public class LoginUser extends JFrame implements ActionListener {
     String login_user = "";
     String login_pass ="";
     public JButton bt_login,bt_createCount;
-    public JTextField txt_login, txt_password;
+    public JTextField txt_login;
+    public JPasswordField txt_password;
     public JLabel label_down;
 
 
@@ -39,7 +40,7 @@ public class LoginUser extends JFrame implements ActionListener {
         txt_login.setHorizontalAlignment(JTextField.CENTER);
         add(txt_login);
 
-        txt_password = new JTextField("");
+        txt_password = new JPasswordField("");
         txt_password.setBackground(new Color(255,255,255));
         txt_password.setBounds(60,110,220,40);
         txt_password.setHorizontalAlignment(JTextField.CENTER);
