@@ -69,8 +69,8 @@ public class MainPrincipal extends JFrame implements ActionListener {
 
             getContentPane().add(tabprincipal);
             getContentPane().add(tabprincipal1);
-           getContentPane().add(tabprincipal2);
-           getContentPane().add(tabprincipal3);
+            getContentPane().add(tabprincipal2);
+            getContentPane().add(tabprincipal3);
 
 
 
