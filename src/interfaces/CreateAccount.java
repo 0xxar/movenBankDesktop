@@ -110,6 +110,11 @@ public class CreateAccount extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if(e.getSource() == bt_createAccount){
+            dispose();
+            new CreateUserAndPassword().setVisible(true);
+        }
+
     }
 
     public static void main(String[] args) {
