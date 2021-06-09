@@ -92,7 +92,7 @@ public class LoginUser extends JFrame implements ActionListener {
         Person user = new Person();
 
         if(e.getSource() == bt_login){
-
+            this.dispose();
             ml.loginUser(txt_login.getText().toString(), txt_password.getText().toString());
 
 

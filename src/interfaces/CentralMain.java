@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class CentralMain extends JFrame implements ActionListener {
 
   JPanel panel_dashboard,panel_verTablaDePrestamos,panel_verTablaDeClientes;
-  JLabel label_dashboard,labelPrestamos,labelClientes;
+  JLabel label_dashboard,labelPrestamos,labelClientes,label_exit;
     public CentralMain(){
         setLayout(null);
         setSize(900,650);

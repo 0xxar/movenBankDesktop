@@ -21,8 +21,11 @@ public class MethodLogin{
 
         if(!pe.getUserName().isEmpty() && !pe.getPassword().isEmpty()){
             JOptionPane.showMessageDialog(null,"Bienvenido a su sistema Bancario");
-            lg.txt_login.setBackground(new Color(255,255,255));
-            lg.txt_password.setBackground(new Color(255,255,255));
+            //lg.txt_login.setBackground(new Color(255,255,255));
+            //lg.txt_password.setBackground(new Color(255,255,255));
+
+            new CentralMain().setVisible(true);
+
             System.out.println(pe.getUserName());
             System.out.println(pe.getPassword());
 
