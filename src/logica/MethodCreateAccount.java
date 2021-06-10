@@ -12,6 +12,7 @@ import javax.swing.*;
 public class MethodCreateAccount {
 
     Person person;
+    public int bandera =0;
     private String firtsname;
 
     public Person getPerson() {
@@ -92,12 +93,15 @@ public class MethodCreateAccount {
         setLastname(lastname);
         setEmail(email);
         setBirthday(birthday);
-
+            bandera =1;
         if(!getFirtsname().isEmpty() && !getLastname().isEmpty() && !getEmail().isEmpty() && !getBirthday().isEmpty()){
-            new CreateAccount().setVisible(false);
+
+           // new CreateAccount().setVisible(false);
             new CreateUserAndPassword().setVisible(true);
 
-        }else{
+        }
+            bandera =0;
+        if(bandera == 0){
             if(getFirtsname().isEmpty()){
                 JOptionPane.showMessageDialog(null,"Por favor completar el Campo Nombre");
             }
@@ -124,8 +128,9 @@ public class MethodCreateAccount {
         setConfirmedPass(confirmPass);
         if(!getUser().isEmpty() && !getPassword().isEmpty() && !getConfirmedPass().isEmpty()){
             if(getPassword().equals(getConfirmedPass())){
-                new CreateAccount().setVisible(false);
+
                 new CentralMain().setVisible(true);
+                new CreateUserAndPassword().dispose();
             }else{
                 JOptionPane.showMessageDialog(null,"Contrasenas no coinciden");
             }

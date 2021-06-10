@@ -25,6 +25,8 @@ public class CreateAccount extends JFrame implements ActionListener {
 
         getContentPane().setBackground(new Color(100,100,100));
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
 
         label_firtName = new JLabel("Ingresa tu primer nombre:");
         label_firtName.setBounds(180,20,250,60);
@@ -112,9 +114,15 @@ public class CreateAccount extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == bt_createAccount){
+            if(new MethodCreateAccount().bandera == 1){
+                    this.dispose();
+                new MethodCreateAccount().CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
+                        txt_email.getText().toString(),txt_birthday.getText().toString());
 
-            new MethodCreateAccount().CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
+            }if(new MethodCreateAccount().bandera ==0)
+                new MethodCreateAccount().CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
                     txt_email.getText().toString(),txt_birthday.getText().toString());
+
         }
 
     }

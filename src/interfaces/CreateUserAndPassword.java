@@ -88,9 +88,14 @@ public class CreateUserAndPassword extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == bt_createCount){
+            if(new MethodCreateAccount().bandera == 1){
+                new MethodCreateAccount().CreateUserAndPass(txt_createUser.getText().toString(),
+                        txt_create_password.getText().toString(),txt_confirmed_password.getText().toString());
 
-            new MethodCreateAccount().CreateUserAndPass(txt_createUser.getText().toString(),
-                    txt_create_password.getText().toString(),txt_confirmed_password.getText().toString());
+            }else{
+                JOptionPane.showMessageDialog(null, "Error de comunicacion");
+            }
+
 
         }if(e.getSource() == bt_cancel){
             this.setVisible(false);
