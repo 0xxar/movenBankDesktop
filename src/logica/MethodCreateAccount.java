@@ -87,7 +87,7 @@ public class MethodCreateAccount {
 
 
     public void CreateCount(String firtsname,String lastname,String email,String birthday){
-        CreateAccount ca = new CreateAccount();
+
         setFirtsname(firtsname);
         setLastname(lastname);
         setEmail(email);
@@ -117,12 +117,14 @@ public class MethodCreateAccount {
     }
 
     public void CreateUserAndPass(String user, String password,String confirmPass){
+
+
         setUser(user);
         setPassword(password);
         setConfirmedPass(confirmPass);
         if(!getUser().isEmpty() && !getPassword().isEmpty() && !getConfirmedPass().isEmpty()){
             if(getPassword().equals(getConfirmedPass())){
-                new CreateUserAndPassword().setVisible(false);
+                new CreateAccount().setVisible(false);
                 new CentralMain().setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null,"Contrasenas no coinciden");

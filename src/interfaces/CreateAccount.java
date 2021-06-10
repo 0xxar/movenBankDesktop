@@ -113,8 +113,7 @@ public class CreateAccount extends JFrame implements ActionListener {
 
         if(e.getSource() == bt_createAccount){
 
-            MethodCreateAccount mca = new MethodCreateAccount();
-            mca.CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
+            new MethodCreateAccount().CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
                     txt_email.getText().toString(),txt_birthday.getText().toString());
         }
 
