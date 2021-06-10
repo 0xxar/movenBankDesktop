@@ -1,5 +1,7 @@
 package interfaces;
 
+import logica.MethodCreateAccount;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -87,6 +89,8 @@ public class CreateUserAndPassword extends JFrame implements ActionListener {
 
         if(e.getSource() == bt_createCount){
 
+            new MethodCreateAccount().CreateUserAndPass(txt_createUser.getText().toString(),
+                    txt_create_password.getText().toString(),txt_confirmed_password.getText().toString());
 
         }if(e.getSource() == bt_cancel){
             this.setVisible(false);

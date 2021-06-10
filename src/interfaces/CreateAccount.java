@@ -1,5 +1,6 @@
 package interfaces;
 
+import logica.MethodCreateAccount;
 import logica.MethodLogin.*;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class CreateAccount extends JFrame implements ActionListener {
         getContentPane().setBackground(new Color(100,100,100));
 
 
-        label_firtName = new JLabel("Introduce tu primer nombre:");
+        label_firtName = new JLabel("Ingresa tu primer nombre:");
         label_firtName.setBounds(180,20,250,60);
         label_firtName.setFont(new Font("Andale Mono",2,14));
         label_firtName.setForeground(new Color(0,0,0));
@@ -38,7 +39,7 @@ public class CreateAccount extends JFrame implements ActionListener {
         txt_firtName.setHorizontalAlignment(JTextField.CENTER);
         add(txt_firtName);
 
-        label_lastName = new JLabel("Introduce tu primer apellido:");
+        label_lastName = new JLabel("Ingresa tu apellido:");
         label_lastName.setBounds(180,120,250,60);
         label_lastName.setFont(new Font("Andale Mono",2,14));
         label_lastName.setForeground(new Color(0,0,0));
@@ -64,13 +65,13 @@ public class CreateAccount extends JFrame implements ActionListener {
         txt_email.setHorizontalAlignment(JTextField.CENTER);
         add(txt_email);
 
-        label_birthday = new JLabel("Introduce tu anio de naciemiento:");
+        label_birthday = new JLabel("Ingresa tu anio de naciemiento:");
         label_birthday.setBounds(180,320,250,60);
         label_birthday.setFont(new Font("Andale Mono",2,14));
         label_birthday.setForeground(new Color(0,0,0));
         add(label_birthday);
 
-        txt_birthday = new JTextField("1999/01/01");
+        txt_birthday = new JTextField("YYYY/MM/DD");
         txt_birthday.setBounds(140,370,250,50);
         txt_birthday.setForeground(new Color(0,0,0));
         txt_birthday.setFont(new Font("Andale Mono",2,14));
@@ -111,8 +112,10 @@ public class CreateAccount extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == bt_createAccount){
-            dispose();
-            new CreateUserAndPassword().setVisible(true);
+
+            MethodCreateAccount mca = new MethodCreateAccount();
+            mca.CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
+                    txt_email.getText().toString(),txt_birthday.getText().toString());
         }
 
     }
