@@ -12,8 +12,16 @@ import javax.swing.*;
 public class MethodCreateAccount {
 
     Person person;
-    public int bandera =0;
+    private int bandera;
     private String firtsname;
+
+    public int getBandera() {
+        return bandera;
+    }
+
+    public void setBandera(int bandera) {
+        this.bandera = bandera;
+    }
 
     public Person getPerson() {
         return person;
@@ -87,21 +95,22 @@ public class MethodCreateAccount {
     private String confirmedPass;
 
 
+
     public void CreateCount(String firtsname,String lastname,String email,String birthday){
 
         setFirtsname(firtsname);
         setLastname(lastname);
         setEmail(email);
         setBirthday(birthday);
-            bandera =1;
+
         if(!getFirtsname().isEmpty() && !getLastname().isEmpty() && !getEmail().isEmpty() && !getBirthday().isEmpty()){
 
-           // new CreateAccount().setVisible(false);
+            setBandera(1);
+            System.out.println(getBandera());
             new CreateUserAndPassword().setVisible(true);
 
-        }
-            bandera =0;
-        if(bandera == 0){
+        }else{
+            setBandera(2);
             if(getFirtsname().isEmpty()){
                 JOptionPane.showMessageDialog(null,"Por favor completar el Campo Nombre");
             }

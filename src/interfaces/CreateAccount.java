@@ -112,19 +112,25 @@ public class CreateAccount extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+            MethodCreateAccount mca = new MethodCreateAccount();
         if(e.getSource() == bt_createAccount){
-            if(new MethodCreateAccount().bandera == 1){
-                    this.dispose();
-                new MethodCreateAccount().CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
-                        txt_email.getText().toString(),txt_birthday.getText().toString());
 
-            }if(new MethodCreateAccount().bandera ==0)
-                new MethodCreateAccount().CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
+
+                mca.CreateCount(txt_firtName.getText().toString(),txt_lastName.getText().toString(),
                     txt_email.getText().toString(),txt_birthday.getText().toString());
+                if(mca.getBandera() == 1){
+                    this.dispose();
+                }if(mca.getBandera() == 2){
+
+                }
+
+
+    }
+        if(e.getSource() == bt_cancel){
+            this.dispose();
+            new LoginUser().setVisible(true);
 
         }
-
     }
 
     public static void main(String[] args) {

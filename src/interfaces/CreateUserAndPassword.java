@@ -88,7 +88,7 @@ public class CreateUserAndPassword extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == bt_createCount){
-            if(new MethodCreateAccount().bandera == 1){
+            if(new MethodCreateAccount().getBandera() == 1){
                 new MethodCreateAccount().CreateUserAndPass(txt_createUser.getText().toString(),
                         txt_create_password.getText().toString(),txt_confirmed_password.getText().toString());
 

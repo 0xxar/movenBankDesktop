@@ -13,26 +13,38 @@ public class MethodLogin{
     Person pe = new Person();
     LoginUser lg = new LoginUser();
 
-//metodo encargado de validar los campos al inicar sesion
+    private int bandera;
+
+    public int getBandera() {
+        return bandera;
+    }
+
+    public void setBandera(int bandera) {
+        this.bandera = bandera;
+    }
+
+    //metodo encargado de validar los campos al inicar sesion
     public void loginUser(String userName,String password){
 
         pe.setUserName(userName);
         pe.setPassword(password);
 
-        if(!pe.getUserName().isEmpty() && !pe.getPassword().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Bienvenido a su sistema Bancario");
-            //lg.txt_login.setBackground(new Color(255,255,255));
-            //lg.txt_password.setBackground(new Color(255,255,255));
 
-            new CentralMain().setVisible(true);
+            if(!pe.getUserName().isEmpty() && !pe.getPassword().isEmpty()){
+                setBandera(1);
+                JOptionPane.showMessageDialog(null,"Bienvenido a su sistema Bancario");
+                //lg.txt_login.setBackground(new Color(255,255,255));
+                //lg.txt_password.setBackground(new Color(255,255,255));
 
-            System.out.println(pe.getUserName());
-            System.out.println(pe.getPassword());
+                new CentralMain().setVisible(true);
 
+                System.out.println(pe.getUserName());
+                System.out.println(pe.getPassword());
 
+            }
 
-        }else {
-
+        else{
+                setBandera(2);
             if (pe.getUserName().isEmpty() && pe.getPassword().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor completar los campos vacios");
                 lg.txt_login.setBackground(new Color(255, 2, 12));
@@ -63,4 +75,9 @@ public class MethodLogin{
 
 
     }
+
+
+
+
+
 }

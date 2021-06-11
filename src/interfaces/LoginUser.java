@@ -14,6 +14,8 @@ public class LoginUser extends JFrame implements ActionListener {
     // variables
     String login_user = "";
     String login_pass ="";
+
+
     public JButton bt_login,bt_createCount;
     public JTextField txt_login;
     public JPasswordField txt_password;
@@ -92,8 +94,19 @@ public class LoginUser extends JFrame implements ActionListener {
         Person user = new Person();
 
         if(e.getSource() == bt_login){
-            this.dispose();
-            ml.loginUser(txt_login.getText().toString(), txt_password.getText().toString());
+
+
+                    ml.loginUser(txt_login.getText().toString(), txt_password.getText().toString());
+                    if(ml.getBandera()==1){
+                        this.dispose();
+                    }if(ml.getBandera()==2){
+
+            }
+
+
+
+
+
 
 
         }if(e.getSource() == bt_createCount){
@@ -101,5 +114,9 @@ public class LoginUser extends JFrame implements ActionListener {
             ml.RegisterAccount();
         }
 
+
+
     }
+
+
 }
