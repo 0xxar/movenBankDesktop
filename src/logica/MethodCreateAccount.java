@@ -136,15 +136,18 @@ public class MethodCreateAccount {
         setPassword(password);
         setConfirmedPass(confirmPass);
         if(!getUser().isEmpty() && !getPassword().isEmpty() && !getConfirmedPass().isEmpty()){
+            setBandera(1);
             if(getPassword().equals(getConfirmedPass())){
 
                 new CentralMain().setVisible(true);
                 new CreateUserAndPassword().dispose();
             }else{
+                setBandera(2);
                 JOptionPane.showMessageDialog(null,"Contrasenas no coinciden");
             }
 
         }else{
+            setBandera(2);
 
             if(getUser().isEmpty()){
 
