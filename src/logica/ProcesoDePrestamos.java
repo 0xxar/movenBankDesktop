@@ -18,7 +18,7 @@ public class ProcesoDePrestamos {
 
     }
 
-    
+
 
     public static void main(String[] args) {
 
