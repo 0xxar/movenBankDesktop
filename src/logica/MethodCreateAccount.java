@@ -3,6 +3,7 @@ package logica;
 import interfaces.CentralMain;
 import interfaces.CreateAccount;
 import interfaces.CreateUserAndPassword;
+import interfaces.LoginUser;
 import logica.Person.*;
 import interfaces.CreateAccount.*;
 import interfaces.CreateUserAndPassword.*;
@@ -130,7 +131,7 @@ public class MethodCreateAccount {
     }
 
     public void CreateUserAndPass(String user, String password,String confirmPass){
-
+            LoginUser lu = new LoginUser();
 
         setUser(user);
         setPassword(password);
@@ -139,8 +140,10 @@ public class MethodCreateAccount {
             setBandera(1);
             if(getPassword().equals(getConfirmedPass())){
 
-                new CentralMain().setVisible(true);
-                new CreateUserAndPassword().dispose();
+                lu.setVisible(true);
+                lu.txt_login.setText(getUser());
+                lu.txt_password.setText(getPassword());
+
             }else{
                 setBandera(2);
                 JOptionPane.showMessageDialog(null,"Contrasenas no coinciden");
