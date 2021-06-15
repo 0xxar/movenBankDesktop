@@ -1,5 +1,7 @@
 package interfaces;
 
+import logica.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -249,6 +251,7 @@ public class FormularioSolicitudCliente extends JFrame implements ActionListener
        bt_enviarSolicitud.setFont(new Font("Andale Mono",1,14));
        bt_enviarSolicitud.addActionListener(this);
        add(bt_enviarSolicitud);
+
 
 
 
