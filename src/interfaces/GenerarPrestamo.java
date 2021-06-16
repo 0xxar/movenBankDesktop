@@ -196,6 +196,7 @@ public class GenerarPrestamo extends JFrame implements ActionListener, MouseList
         }
         if(e.getSource()== bt_cerrar){
             JOptionPane.showMessageDialog(null,"Cerrando registro...");
+            this.dispose();
         }
         if(e.getSource()== bt_imprimir_registros){
             JOptionPane.showMessageDialog(null,"Imprimiendo registro...");
