@@ -33,9 +33,9 @@ public class LoginUser extends JFrame implements ActionListener {
         setTitle("Sistema de prestamos");
         setLocationRelativeTo(null);
         LoginUser.this.getRootPane().setBorder(new LineBorder(new Color(76, 41, 211)));
-
+        //setType(Type.UTILITY);
         getContentPane().setBackground(new Color(255,255,230));
-        //setIconImage(new ImageIcon(getClass().getResource("")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/images/bank.png")).getImage());
 
         //metodo para que la aplicacion no quede ne segundo plano
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

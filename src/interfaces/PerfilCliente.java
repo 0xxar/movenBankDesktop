@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FormularioCliente extends JFrame implements ActionListener {
+public class PerfilCliente extends JFrame implements ActionListener {
 
     JLabel label_name,label_apellido,label_lugarTrabajo,label_cellphone,label_LugarResid,label_gender,label_nacimiento,label_nacionalidad,label_email,label_cedula;
     JTextField txt_nombre,txt_apellido,txt_trabajo,txt_cellPhone,txt_residencia,txt_nacioladidad,txt_email,txt_cedula,txt_naciemiento;
     JComboBox boxGender;
     JButton bt_registrar_cliente, bt_cancelar;
-    public FormularioCliente(){
+    public PerfilCliente(){
         setLayout(null);
         setSize(600,700);
         setResizable(false);
@@ -201,6 +201,6 @@ public class FormularioCliente extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new FormularioCliente().setVisible(true);
+        new PerfilCliente().setVisible(true);
     }
 }

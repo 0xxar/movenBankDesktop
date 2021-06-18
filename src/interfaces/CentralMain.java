@@ -11,35 +11,38 @@ public class CentralMain extends JFrame implements ActionListener,MouseListener 
 
   JPanel panel_dashboard,panel_informePrestamos,panel_InformeUsuarios,panel_presupuesto,panel_RegistrosPagos;
   JLabel label_dashboard,label_informePrestamos,labelClientes,label_exit,label_cerrarSesion;
-  JTabbedPane tabbedPane, tabbedPane1, tabbedPane2;
+  JTabbedPane tabbedPane;
+  JTabbedPane tabbedPane1 = new JTabbedPane();
+  JTabbedPane tabbedPane2 = new JTabbedPane();
     public CentralMain(){
         setLayout(null);
         setSize(900,650);
         setResizable(false);
         setTitle("");
+        //setType(Type.UTILITY);
         setLocationRelativeTo(null);
 
-        getContentPane().setBackground(new Color(0,0,0));
+        getContentPane().setBackground(new Color(255,255,230));
+        setIconImage(new ImageIcon(getClass().getResource("/images/bank.png")).getImage());
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        tabbedPane = new JTabbedPane();
+        /**tabbedPane = new JTabbedPane();
         tabbedPane.setLayout(null);
         tabbedPane.setBounds(5,5,620,540);
-        tabbedPane.setName("inicio");
+        tabbedPane.addTab("Inicio",tabbedPane1);
         add(tabbedPane);
 
         tabbedPane1 = new JTabbedPane();
-        tabbedPane1.setLayout(null);
         tabbedPane1.setBounds(5,5,620,540);
         tabbedPane1.setName("inicio");
+        tabbedPane1.addTab("inicio",tabbedPane2);
         add(tabbedPane1);
 
         tabbedPane2 = new JTabbedPane();
-        tabbedPane2.setLayout(null);
         tabbedPane2.setBounds(5,5,620,540);
         tabbedPane2.setName("inicio");
-        add(tabbedPane2);
+        add(tabbedPane2);**/
 
         ImageIcon imageIcon = new ImageIcon("src/images/bt_of.png");
         label_cerrarSesion = new JLabel(imageIcon);
@@ -51,9 +54,9 @@ public class CentralMain extends JFrame implements ActionListener,MouseListener 
         panel_dashboard.setLayout(null);
         panel_dashboard.setBounds(250,60,620,540);
         panel_dashboard.setBackground(new Color(255,255,255));
-        panel_dashboard.add(tabbedPane);
+       /** panel_dashboard.add(tabbedPane);
         panel_dashboard.add(tabbedPane1);
-        panel_dashboard.add(tabbedPane2);
+        panel_dashboard.add(tabbedPane2);**/
         add(panel_dashboard);
 
         label_informePrestamos = new JLabel("Prestamos");
@@ -118,7 +121,7 @@ public class CentralMain extends JFrame implements ActionListener,MouseListener 
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()== panel_informePrestamos){
 
-            new GenerarPrestamo().setVisible(true);
+            new InformeSolicitudesPrestamos().setVisible(true);
 
         }if(e.getSource()==label_cerrarSesion){
 
