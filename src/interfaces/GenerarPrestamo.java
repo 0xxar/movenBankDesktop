@@ -1,29 +1,56 @@
 package interfaces;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GenerarPrestamo extends JFrame implements ActionListener {
 
-    JTextField txt_nombre,txt_apellido,txt_cedula,txt_nacionalidad,txt_genero,txt_edad,txt_nacimiento,txt_email,txt_celular,txt_nivelEstudio,txt_lugarTrabajo,
-    txt_salario,txt_tiempoLaborando,txt_direccionVivienda,txt_direccionTrabajo,txt_telefonoEmpresa,txt_nivelEndeudamiento,txt_MontoSolicitado,txt_puestoTrabajo,
-    txt_actividadEmpresa,txt_motivoPrestamo,txt_interesPrestamo,txt_tiempoAPagarPrestamo,txt_PagoCuotas,
-    txt_nombreApellidoReferencia,txt_celularReferencia,txt_cedulaReferencia,txt_correoReferencia,txt_parentesco,
-    txt_estadoCivil;
 
+    //TextField datos personales
+    JTextField txt_nombre,txt_apellido,txt_cedula,txt_nacionalidad,
+            txt_estadoCivil,txt_genero,txt_edad,txt_nacimiento,txt_email,txt_celular,txt_nivelEstudio, txt_direccionVivienda;
+    //*******************************************************************************************************
+    //TextField datos laborales
+    JTextField txt_lugarTrabajo,txt_salario,txt_tiempoLaborando,txt_direccionTrabajo,txt_telefonoEmpresa,
+            txt_puestoTrabajo, txt_actividadEmpresa;
+    //********************************************************************************************************
+    //TextField datos del prestamo
+    JTextField txt_MontoSolicitado,txt_motivoPrestamo,txt_interesPrestamo,txt_tiempoAPagarPrestamo,txt_PagoCuotas;
+    //***********************************************************************************************************
+    //TextField datos referencia prestamo
+    JTextField txt_nivelEndeudamiento,
+    txt_nombreApellidoReferencia,txt_celularReferencia,txt_cedulaReferencia,txt_correoReferencia,txt_parentesco;
+    //**********************************************************************************************************
+    //Label datos personales
     JLabel lbl_nombre,lbl_apellido,lbl_cedula,lbl_nacionalidad,lbl_genero,lbl_edad,lbl_nacimiento,
-    lbl_email,lbl_telefono,lbl_lugarTrabajo,lbl_puestoTrabajo,lbl_salario,lbl_tiempoLaborando,lbl_direccionTrabajo,lbl_telefonoEmpresa,lbl_direccionResidencia,
-    lbl_nivelEndeudamiento,lbl_actividadEmpresa,lbl_montoSolicitado,lbl_datosPersonales,lbl_datosLaborales,lbl_datosMonto,lbl_motivoPrestamo,
-    lbl_estatusPrestamo,lbl_interesPrestamo,lbl_tiempoAPagarPrestamo,lbl_PagoCuotas,
-    lbl_nombreApellidoReferencia,lbl_celularReferencia,lbl_cedulaReferencia,lbl_correoReferencia,lbl_parentesco,lbl_datosRefenciaPrestamo,
-    lbl_estadoCivil;
-
+    lbl_email,lbl_telefono,lbl_direccionResidencia,lbl_datosPersonales,
+    lbl_estatusPrestamo, lbl_estadoCivil;
+    //**************************************************************************************************************
+    //Label datos laborales
+    JLabel lbl_lugarTrabajo,lbl_puestoTrabajo,lbl_salario,lbl_tiempoLaborando,lbl_direccionTrabajo,
+            lbl_telefonoEmpresa,lbl_actividadEmpresa,lbl_datosLaborales;
+    //*************************************************************************************************
+    //Label datos del prestamo
+    JLabel lbl_interesPrestamo,lbl_tiempoAPagarPrestamo,lbl_PagoCuotas,lbl_datosMonto,lbl_motivoPrestamo,
+    lbl_montoSolicitado;
+    //**************************************************************************************************
+    //Label datos referencia del presatmo
+    JLabel lbl_nivelEndeudamiento,lbl_nombreApellidoReferencia,
+            lbl_celularReferencia,lbl_cedulaReferencia,lbl_correoReferencia, lbl_parentesco,lbl_datosRefenciaPrestamo;
+    //****************************************************************************************************************
+    //Separadores
     JSeparator separatorVertical,separatorHorizontal,separatorHorizontalII,separatorReferenciaPrestamo;
+    //****************************************************************************************************************
+    //Botones
     JButton bt_enivar,bt_cerrar,bt_referencia;
+    //***************************************************************************************************************
+    JScrollPane scrollPane;
 
-    JComboBox box_estausPrestamo,box_contraoferta,box_parentesco;
+
+    JComboBox box_estausPrestamo,box_contraoferta;
 
     JPanel panelCentral;
     public GenerarPrestamo(){
@@ -31,12 +58,17 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         setSize(900,670);
         setResizable(false);
         setLocationRelativeTo(null);
+        initComponents();
 
         getContentPane().setBackground(new Color(0,0,0));
         setIconImage(new ImageIcon(getClass().getResource("/images/bank.png")).getImage());
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+
+
+    }
+    private void initComponents(){
         lbl_datosPersonales = new JLabel("Datos Personales");
         lbl_datosPersonales.setBounds(120,4,250,50);
         lbl_datosPersonales.setFont(new Font("Andale Mono",1,18));
@@ -81,12 +113,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_cedula);
 
         txt_cedula = new JTextField("X-XXXX-XXXX");
-        txt_cedula.setBounds(20,120,130,30);
+        //txt_cedula.setBounds(20,120,130,30);
         txt_cedula.setFont(new Font("Andale Mono",3,12));
         txt_cedula.setHorizontalAlignment(JTextField.CENTER);
         txt_cedula.setForeground(new Color(0,0,0));
         txt_cedula.setEditable(false);
-        add(txt_cedula);
+        scrollPane = new JScrollPane(txt_cedula);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(20,120,130,30);
+        add(scrollPane);
+
 
         lbl_nacionalidad = new JLabel("Nacionalidad");
         lbl_nacionalidad.setBounds(160,90,100,40);
@@ -170,14 +208,19 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         lbl_email.setHorizontalAlignment(JLabel.CENTER);
         add(lbl_email);
 
-        txt_email = new JTextField("Oscar@mail.com");
-        txt_email.setBounds(5,240,150,30);
+        txt_email = new JTextField("OscarTownPanama@mail.com");
+        //txt_email.setBounds(5,240,150,30);
         txt_email.setFont(new Font("Andale Mono",3,12));
         txt_email.setHorizontalAlignment(JTextField.CENTER);
         txt_email.setForeground(new Color(0,0,0));
         txt_email.setEditable(false);
-        add(txt_email);
-       //************************************************************
+        scrollPane = new JScrollPane(txt_email);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(5,240,150,50);
+        add(scrollPane);
+        //************************************************************
         lbl_telefono = new JLabel("Telefono");
         lbl_telefono.setBounds(150,210,100,40);
         lbl_telefono.setFont(new Font("Andale Mono",3,12));
@@ -186,12 +229,16 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_telefono);
 
         txt_celular = new JTextField("(507)XXXX-XXXX");
-        txt_celular.setBounds(160,240,120,30);
+        // txt_celular.setBounds(160,240,120,50);
         txt_celular.setFont(new Font("Andale Mono",3,12));
         txt_celular.setHorizontalAlignment(JTextField.CENTER);
         txt_celular.setForeground(new Color(0,0,0));
         txt_celular.setEditable(false);
-        add(txt_celular);
+        scrollPane = new JScrollPane(txt_celular);
+        scrollPane.setBorder(BorderFactory.createEtchedBorder());
+        scrollPane.setBounds(160,240,120,50);
+        add(scrollPane);
+
 
         lbl_direccionResidencia = new JLabel("Direccion residencial");
         lbl_direccionResidencia.setBounds(285,210,200,40);
@@ -201,20 +248,26 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_direccionResidencia);
 
         txt_direccionVivienda = new JTextField("Panama,City Panama, calle 23");
-        txt_direccionVivienda.setBounds(285,240,200,30);
+        //txt_direccionVivienda.setBounds(285,240,200,30);
         txt_direccionVivienda.setFont(new Font("Andale Mono",3,12));
         txt_direccionVivienda.setHorizontalAlignment(JTextField.CENTER);
         txt_direccionVivienda.setForeground(new Color(0,0,0));
         txt_direccionVivienda.setEditable(false);
-        add(txt_direccionVivienda);
+        scrollPane = new JScrollPane(txt_direccionVivienda);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(285,240,200,30);
+        add(scrollPane);
 
-    //*********************************************************************
+
+        //*********************************************************************
         separatorReferenciaPrestamo = new JSeparator();
         separatorReferenciaPrestamo.setOrientation(SwingConstants.HORIZONTAL);
         separatorReferenciaPrestamo.setBounds(20,350,450,20);
         separatorReferenciaPrestamo.setFont(new Font("Andale Mono",1,14));
         add(separatorReferenciaPrestamo);
-    //*************************************************************************
+        //*************************************************************************
         //REFERENCIA DE DATOS PARA PRESTAMO
         lbl_datosRefenciaPrestamo = new JLabel("Datos de referencias de prestamo");
         lbl_datosRefenciaPrestamo.setBounds(80,350,300,40);
@@ -231,12 +284,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_nombreApellidoReferencia);
 
         txt_nombreApellidoReferencia = new JTextField("Oscar Isaac");
-        txt_nombreApellidoReferencia.setBounds(20,410,100,30);
+        //txt_nombreApellidoReferencia.setBounds(20,410,100,30);
         txt_nombreApellidoReferencia.setFont(new Font("Andale Mono",3,12));
         txt_nombreApellidoReferencia.setHorizontalAlignment(JTextField.CENTER);
         txt_nombreApellidoReferencia.setForeground(new Color(0,0,0));
         txt_nombreApellidoReferencia.setEditable(false);
-        add(txt_nombreApellidoReferencia);
+        scrollPane = new JScrollPane(txt_celularReferencia);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(20,410,100,30);
+        add(scrollPane);
+
 
         lbl_celularReferencia = new JLabel("Celular o telefono");
         lbl_celularReferencia.setBounds(120,380,130,40);
@@ -246,12 +305,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_celularReferencia);
 
         txt_celularReferencia = new JTextField("507-XXXX-XXXX");
-        txt_celularReferencia.setBounds(130,410,120,30);
+        //txt_celularReferencia.setBounds(130,410,120,30);
         txt_celularReferencia.setFont(new Font("Andale Mono",3,12));
         txt_celularReferencia.setHorizontalAlignment(JTextField.CENTER);
         txt_celularReferencia.setForeground(new Color(0,0,0));
         txt_celularReferencia.setEditable(false);
-        add(txt_celularReferencia);
+        scrollPane = new JScrollPane(txt_celularReferencia);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(130,410,120,30);
+        add(scrollPane);
+
 
         lbl_correoReferencia = new JLabel("Email");
         lbl_correoReferencia.setBounds(255,380,130,40);
@@ -261,12 +326,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_correoReferencia);
 
         txt_correoReferencia = new JTextField("Oscar@mail.com");
-        txt_correoReferencia.setBounds(255,410,120,30);
+        //txt_correoReferencia.setBounds(255,410,120,30);
         txt_correoReferencia.setFont(new Font("Andale Mono",3,12));
         txt_correoReferencia.setHorizontalAlignment(JTextField.CENTER);
         txt_correoReferencia.setForeground(new Color(0,0,0));
         txt_correoReferencia.setEditable(false);
-        add(txt_correoReferencia);
+        scrollPane = new JScrollPane(txt_correoReferencia);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(255,410,120,30);
+        add(scrollPane);
+
 
         lbl_parentesco = new JLabel("Perentesco");
         lbl_parentesco.setBounds(355,380,130,40);
@@ -347,13 +418,13 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
 
 
 
-    //*********************************************************************
+        //*********************************************************************
         separatorVertical = new JSeparator();
         separatorVertical.setOrientation(SwingConstants.VERTICAL);
         separatorVertical.setBounds(490,30,20,480);
         separatorVertical.setFont(new Font("Andale Mono",1,14));
         add(separatorVertical);
-    //*************************************************************************
+        //*************************************************************************
         //Datos laborales
 
         lbl_datosLaborales = new JLabel("Datos laborales");
@@ -369,13 +440,20 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         lbl_lugarTrabajo.setHorizontalAlignment(JLabel.CENTER);
         add(lbl_lugarTrabajo);
 
+
         txt_lugarTrabajo = new JTextField("Oscar Isaac");
-        txt_lugarTrabajo.setBounds(500,60,150,30);
+        //txt_lugarTrabajo.setBounds(500,60,150,30);
         txt_lugarTrabajo.setFont(new Font("Andale Mono",3,12));
         txt_lugarTrabajo.setHorizontalAlignment(JTextField.CENTER);
         txt_lugarTrabajo.setForeground(new Color(0,0,0));
         txt_lugarTrabajo.setEditable(false);
-        add(txt_lugarTrabajo);
+        scrollPane = new JScrollPane(txt_lugarTrabajo);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(500,60,150,30);
+        add(scrollPane);
+
 
         lbl_direccionTrabajo = new JLabel("Direccion de empresa");
         lbl_direccionTrabajo.setBounds(700,30,200,40);
@@ -385,12 +463,17 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_direccionTrabajo);
 
         txt_direccionTrabajo = new JTextField("Oscar Isaac");
-        txt_direccionTrabajo.setBounds(720,60,150,30);
+        //txt_direccionTrabajo.setBounds(720,60,150,30);
         txt_direccionTrabajo.setFont(new Font("Andale Mono",3,12));
         txt_direccionTrabajo.setHorizontalAlignment(JTextField.CENTER);
         txt_direccionTrabajo.setForeground(new Color(0,0,0));
         txt_direccionTrabajo.setEditable(false);
-        add(txt_direccionTrabajo);
+        scrollPane = new JScrollPane(txt_direccionTrabajo);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(720,60,150,30);
+        add(scrollPane);
 //**************************************************************************************
         lbl_puestoTrabajo = new JLabel("Puesto de trabajo");
         lbl_puestoTrabajo.setBounds(500,90,150,40);
@@ -400,12 +483,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_puestoTrabajo);
 
         txt_puestoTrabajo = new JTextField("Gerente de tienda");
-        txt_puestoTrabajo.setBounds(500,120,150,30);
+        //txt_puestoTrabajo.setBounds(500,120,150,30);
         txt_puestoTrabajo.setFont(new Font("Andale Mono",3,12));
         txt_puestoTrabajo.setHorizontalAlignment(JTextField.CENTER);
         txt_puestoTrabajo.setForeground(new Color(0,0,0));
         txt_puestoTrabajo.setEditable(false);
-        add(txt_puestoTrabajo);
+        scrollPane = new JScrollPane(txt_puestoTrabajo);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(500,120,150,30);
+        add(scrollPane);
+
 
         lbl_tiempoLaborando = new JLabel("Tiempo laborando");
         lbl_tiempoLaborando.setBounds(700,90,200,40);
@@ -415,12 +504,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_tiempoLaborando);
 
         txt_tiempoLaborando = new JTextField("12 meses");
-        txt_tiempoLaborando.setBounds(720,120,150,30);
+        //txt_tiempoLaborando.setBounds(720,120,150,30);
         txt_tiempoLaborando.setFont(new Font("Andale Mono",3,12));
         txt_tiempoLaborando.setHorizontalAlignment(JTextField.CENTER);
         txt_tiempoLaborando.setForeground(new Color(0,0,0));
         txt_tiempoLaborando.setEditable(false);
-        add(txt_tiempoLaborando);
+        scrollPane = new JScrollPane(txt_tiempoLaborando);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(720,120,150,30);
+        add(scrollPane);
+
 //************************************************************************************
         lbl_salario = new JLabel("Salario mensual");
         lbl_salario.setBounds(500,150,150,40);
@@ -430,12 +525,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_salario);
 
         txt_salario = new JTextField("B/.1800.00");
-        txt_salario.setBounds(500,180,150,30);
+        //txt_salario.setBounds(500,180,150,30);
         txt_salario.setFont(new Font("Andale Mono",3,12));
         txt_salario.setHorizontalAlignment(JTextField.CENTER);
         txt_salario.setForeground(new Color(0,0,0));
         txt_salario.setEditable(false);
-        add(txt_salario);
+        scrollPane = new JScrollPane(txt_salario);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(500,180,150,30);
+        add(scrollPane);
+
 
         lbl_nivelEndeudamiento = new JLabel("Nivel de endeudamiento %");
         lbl_nivelEndeudamiento.setBounds(700,150,200,40);
@@ -445,12 +546,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_nivelEndeudamiento);
 
         txt_nivelEndeudamiento = new JTextField("30.00 %");
-        txt_nivelEndeudamiento.setBounds(720,180,150,30);
+        //txt_nivelEndeudamiento.setBounds(720,180,150,30);
         txt_nivelEndeudamiento.setFont(new Font("Andale Mono",3,12));
         txt_nivelEndeudamiento.setHorizontalAlignment(JTextField.CENTER);
         txt_nivelEndeudamiento.setForeground(new Color(0,0,0));
         txt_nivelEndeudamiento.setEditable(false);
-        add(txt_nivelEndeudamiento);
+        scrollPane = new JScrollPane(txt_nivelEndeudamiento);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(720,180,150,30);
+        add(scrollPane);
+
 //***********************************************************************************
         lbl_actividadEmpresa = new JLabel("Actividad de la empresa");
         lbl_actividadEmpresa.setBounds(480,210,200,40);
@@ -460,12 +567,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_actividadEmpresa);
 
         txt_actividadEmpresa = new JTextField("Entretenimiento");
-        txt_actividadEmpresa.setBounds(500,240,150,30);
+        //txt_actividadEmpresa.setBounds(500,240,150,30);
         txt_actividadEmpresa.setFont(new Font("Andale Mono",3,12));
         txt_actividadEmpresa.setHorizontalAlignment(JTextField.CENTER);
         txt_actividadEmpresa.setForeground(new Color(0,0,0));
         txt_actividadEmpresa.setEditable(false);
-        add(txt_actividadEmpresa);
+        scrollPane = new JScrollPane(txt_actividadEmpresa);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(500,240,150,30);
+        add(scrollPane);
+
 
         lbl_telefonoEmpresa = new JLabel("Telefono de la empresa");
         lbl_telefonoEmpresa.setBounds(700,210,200,40);
@@ -475,12 +588,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_telefonoEmpresa);
 
         txt_telefonoEmpresa = new JTextField("396-XXXX");
-        txt_telefonoEmpresa.setBounds(720,240,150,30);
+        //txt_telefonoEmpresa.setBounds(720,240,150,30);
         txt_telefonoEmpresa.setFont(new Font("Andale Mono",3,12));
         txt_telefonoEmpresa.setHorizontalAlignment(JTextField.CENTER);
         txt_telefonoEmpresa.setForeground(new Color(0,0,0));
         txt_telefonoEmpresa.setEditable(false);
-        add(txt_telefonoEmpresa);
+        scrollPane = new JScrollPane(txt_telefonoEmpresa);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(720,240,150,30);
+        add(scrollPane);
+
 
         //*********************************************************************
         separatorHorizontal = new JSeparator();
@@ -504,12 +623,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_montoSolicitado);
 
         txt_MontoSolicitado = new JTextField("3000.00");
-        txt_MontoSolicitado.setBounds(500,330,150,30);
+        //txt_MontoSolicitado.setBounds(500,330,150,30);
         txt_MontoSolicitado.setFont(new Font("Andale Mono",3,12));
         txt_MontoSolicitado.setHorizontalAlignment(JTextField.CENTER);
         txt_MontoSolicitado.setForeground(new Color(0,0,0));
         txt_MontoSolicitado.setEditable(false);
-        add(txt_MontoSolicitado);
+        scrollPane = new JScrollPane(txt_MontoSolicitado);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(500,330,150,30);
+        add(scrollPane);
+
 
         lbl_motivoPrestamo = new JLabel("Motivo del prestamo solicitado");
         lbl_motivoPrestamo.setBounds(680,300,200,40);
@@ -519,12 +644,17 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_motivoPrestamo);
 
         txt_motivoPrestamo = new JTextField("Emprendimiento");
-        txt_motivoPrestamo.setBounds(700,330,150,30);
+        //txt_motivoPrestamo.setBounds(700,330,150,30);
         txt_motivoPrestamo.setFont(new Font("Andale Mono",3,12));
         txt_motivoPrestamo.setHorizontalAlignment(JTextField.CENTER);
         txt_motivoPrestamo.setForeground(new Color(0,0,0));
         txt_motivoPrestamo.setEditable(false);
-        add(txt_motivoPrestamo);
+        scrollPane = new JScrollPane(txt_motivoPrestamo);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(700,330,150,30);
+        add(scrollPane);
 //*********************************************************************************************
         lbl_interesPrestamo = new JLabel("Tasa de interes %");
         lbl_interesPrestamo.setBounds(500,360,200,40);
@@ -534,12 +664,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_interesPrestamo);
 
         txt_interesPrestamo = new JTextField("8.00");
-        txt_interesPrestamo.setBounds(500,390,150,30);
+        //txt_interesPrestamo.setBounds(500,390,150,30);
         txt_interesPrestamo.setFont(new Font("Andale Mono",3,12));
         txt_interesPrestamo.setHorizontalAlignment(JTextField.CENTER);
         txt_interesPrestamo.setForeground(new Color(0,0,0));
         txt_interesPrestamo.setEditable(false);
-        add(txt_interesPrestamo);
+        scrollPane = new JScrollPane(txt_interesPrestamo);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(500,390,150,30);
+        add(scrollPane);
+
 
         lbl_tiempoAPagarPrestamo = new JLabel("Tiempo a pagar prestamo");
         lbl_tiempoAPagarPrestamo.setBounds(680,360,200,40);
@@ -549,12 +685,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_tiempoAPagarPrestamo);
 
         txt_tiempoAPagarPrestamo = new JTextField("72 meses");
-        txt_tiempoAPagarPrestamo.setBounds(700,390,150,30);
+        //txt_tiempoAPagarPrestamo.setBounds(700,390,150,30);
         txt_tiempoAPagarPrestamo.setFont(new Font("Andale Mono",3,12));
         txt_tiempoAPagarPrestamo.setHorizontalAlignment(JTextField.CENTER);
         txt_tiempoAPagarPrestamo.setForeground(new Color(0,0,0));
         txt_tiempoAPagarPrestamo.setEditable(false);
-        add(txt_tiempoAPagarPrestamo);
+        scrollPane = new JScrollPane(txt_tiempoLaborando);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(700,390,150,30);
+        add(scrollPane);
+
 //******************************************************************************************
         lbl_PagoCuotas = new JLabel("Monto a pagar a cuotas B/.");
         lbl_PagoCuotas.setBounds(580,420,200,40);
@@ -564,12 +706,18 @@ public class GenerarPrestamo extends JFrame implements ActionListener {
         add(lbl_PagoCuotas);
 
         txt_PagoCuotas = new JTextField("87.50");
-        txt_PagoCuotas.setBounds(600,450,150,30);
+        //txt_PagoCuotas.setBounds(600,450,150,30);
         txt_PagoCuotas.setFont(new Font("Andale Mono",3,12));
         txt_PagoCuotas.setHorizontalAlignment(JTextField.CENTER);
         txt_PagoCuotas.setForeground(new Color(0,0,0));
         txt_PagoCuotas.setEditable(false);
-        add(txt_PagoCuotas);
+        scrollPane = new JScrollPane(txt_PagoCuotas);
+        scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setViewportBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollPane.setBounds(600,450,150,30);
+        add(scrollPane);
+
 
         //*********************************************************************
         separatorHorizontalII = new JSeparator();
