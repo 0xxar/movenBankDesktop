@@ -7,13 +7,16 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
-
+    //limitar los decimales
+    DecimalFormat df = new DecimalFormat("#.00");
     //VARIABLES
-    double salario,tiempoLaborando,nivelEndeudamiento;
+    double salario ,tiempoLaborando,nivelEndeudamiento,deudaActual;
+    String nivelEstudio,motivo_prestamo;
     //TextField datos personales
-    public JTextField txt_nombre,txt_apellido,txt_cedula,txt_nacionalidad
+    public JTextField txt_nombre,txt_apellido,txt_cedula,txt_nacionalidad,txt_apellidoCasado
             ,txt_edad,txt_nacimiento,txt_email,txt_celular, txt_direccionVivienda;
     //*******************************************************************************************************
     //TextField datos laborales
@@ -30,7 +33,7 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
     //Label datos personales
     JLabel lbl_nombre,lbl_apellido,lbl_cedula,lbl_nacionalidad,lbl_genero,lbl_edad,lbl_nacimiento,
             lbl_email,lbl_telefono,lbl_direccionResidencia,lbl_datosPersonales,
-            lbl_estatusPrestamo, lbl_estadoCivil;
+            lbl_estatusPrestamo, lbl_estadoCivil,lbl_nivelEstudio,lbl_apellidoCasado;
     //**************************************************************************************************************
     //Label datos laborales
     JLabel lbl_lugarTrabajo,lbl_puestoTrabajo,lbl_salario,lbl_tiempoLaborando,lbl_direccionTrabajo,
@@ -48,7 +51,7 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
     JSeparator separatorVertical,separatorHorizontal,separatorHorizontalII,separatorReferenciaPrestamo;
     //****************************************************************************************************************
     //Botones
-    JButton bt_enivar,bt_cerrar,bt_referencia;
+    JButton bt_enivar,bt_cerrar,bt_referencia,bt_verPropuestaPrestamo;
     JButton bt_calcularPretamo;
     //***************************************************************************************************************
     JScrollPane scrollPane;
@@ -114,6 +117,21 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         txt_apellido.setForeground(new Color(0,0,0));
         txt_apellido.setEditable(true);
         add(txt_apellido);
+
+        lbl_apellidoCasado = new JLabel("Apellidos");
+        lbl_apellidoCasado.setBounds(300,30,100,40);
+        lbl_apellidoCasado.setFont(new Font("Andale Mono",3,12));
+        lbl_apellidoCasado.setForeground(new Color(0,233,0));
+        lbl_apellidoCasado.setHorizontalAlignment(JLabel.CENTER);
+        add(lbl_apellidoCasado);
+
+        txt_apellidoCasado = new JTextField("Oscar Isaac");
+        txt_apellidoCasado.setBounds(310,60,120,30);
+        txt_apellidoCasado.setFont(new Font("Andale Mono",3,12));
+        txt_apellidoCasado.setHorizontalAlignment(JTextField.CENTER);
+        txt_apellidoCasado.setForeground(new Color(0,0,0));
+        txt_apellidoCasado.setEditable(false);
+        add(txt_apellidoCasado);
         //***************************************************************
         lbl_cedula = new JLabel("Cedula de indentidad");
         lbl_cedula.setBounds(20,90,150,40);
@@ -165,7 +183,7 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         box_estadoCivil.addItem("Unido");
         box_estadoCivil.addItem("Soltero");
         box_estadoCivil.setForeground(new Color(0,0,0));
-        box_estadoCivil.setEditable(true);
+        box_estadoCivil.addActionListener(this);
         add(box_estadoCivil);
         //****************************************************************
         lbl_genero = new JLabel("Genero");
@@ -271,6 +289,26 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBounds(285,240,200,30);
         add(scrollPane);
+//***********************************************************************************************8
+        lbl_nivelEstudio = new JLabel("Nivel de estudio");
+        lbl_nivelEstudio.setBounds(30,280,100,40);
+        lbl_nivelEstudio.setFont(new Font("Andale Mono",3,12));
+        lbl_nivelEstudio.setForeground(new Color(0,233,0));
+        lbl_nivelEstudio.setHorizontalAlignment(JLabel.CENTER);
+        add(lbl_nivelEstudio);
+
+        box_nivelEstudio = new JComboBox();
+        box_nivelEstudio.setBounds(20,310,150,30);
+        box_nivelEstudio.setFont(new Font("Andale Mono",3,12));
+        box_nivelEstudio.addItem("None");
+        box_nivelEstudio.addItem("Primaria");
+        box_nivelEstudio.addItem("Secundaria");
+        box_nivelEstudio.addItem("Universidad");
+        box_nivelEstudio.addItem("Universidad-Maestria");
+        box_nivelEstudio.addItem("Universidad-Doctorado");
+        box_nivelEstudio.setForeground(new Color(0,0,0));
+        box_nivelEstudio.addActionListener(this);
+        add(box_nivelEstudio);
 
 
         //*********************************************************************
@@ -563,7 +601,7 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         lbl_tiempoLaborando.setHorizontalAlignment(JLabel.CENTER);
         add(lbl_tiempoLaborando);
 
-        txt_tiempoLaborando = new JTextField("12");
+        txt_tiempoLaborando = new JTextField();
         //txt_tiempoLaborando.setBounds(720,120,150,30);
         txt_tiempoLaborando.setFont(new Font("Andale Mono",3,12));
         txt_tiempoLaborando.setHorizontalAlignment(JTextField.CENTER);
@@ -665,7 +703,7 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         lbl_montoSolicitado.setHorizontalAlignment(JLabel.CENTER);
         add(lbl_montoSolicitado);
 
-        txt_MontoSolicitado = new JTextField();
+        txt_MontoSolicitado = new JTextField("");
         //txt_MontoSolicitado.setBounds(500,330,150,30);
         txt_MontoSolicitado.setFont(new Font("Andale Mono",3,12));
         txt_MontoSolicitado.setHorizontalAlignment(JTextField.CENTER);
@@ -708,7 +746,7 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         lbl_interesPrestamo.setHorizontalAlignment(JLabel.CENTER);
         add(lbl_interesPrestamo);
 
-        txt_interesPrestamo = new JTextField();
+        txt_interesPrestamo = new JTextField("");
         //txt_interesPrestamo.setBounds(500,390,150,30);
         txt_interesPrestamo.setFont(new Font("Andale Mono",3,12));
         txt_interesPrestamo.setHorizontalAlignment(JTextField.CENTER);
@@ -748,7 +786,7 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         lbl_PagoCuotas.setHorizontalAlignment(JLabel.CENTER);
         add(lbl_PagoCuotas);
 
-        txt_PagoCuotas = new JTextField();
+        txt_PagoCuotas = new JTextField("");
         //txt_PagoCuotas.setBounds(600,450,150,30);
         txt_PagoCuotas.setFont(new Font("Andale Mono",3,12));
         txt_PagoCuotas.setHorizontalAlignment(JTextField.CENTER);
@@ -771,15 +809,15 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
 
 
 
-        bt_enivar = new JButton("Siguiente");
-        bt_enivar.setBounds(740,580,100,30);
-        bt_enivar.setFont(new Font("Andale Mono",1,12));
-        bt_enivar.setForeground(new Color(0,0,0));
-        bt_enivar.setEnabled(false);
-        bt_enivar.addActionListener(this);
-        add(bt_enivar);
+        bt_verPropuestaPrestamo = new JButton("Ver propuesta de prestamo");
+        bt_verPropuestaPrestamo.setBounds(570,520,200,30);
+        bt_verPropuestaPrestamo.setFont(new Font("Andale Mono",1,12));
+        bt_verPropuestaPrestamo.setForeground(new Color(0,0,0));
+        bt_verPropuestaPrestamo.setEnabled(true);
+        bt_verPropuestaPrestamo.addActionListener(this);
+        add(bt_verPropuestaPrestamo);
 
-        bt_referencia = new JButton("Enviar referencia");
+        bt_referencia = new JButton("Enviar solicitud");
         bt_referencia.setBounds(500,580,180,30);
         bt_referencia.setFont(new Font("Andale Mono",1,12));
         bt_referencia.setForeground(new Color(0,0,0));
@@ -802,44 +840,107 @@ public class SolicitudPrestamoCliente extends JFrame implements ActionListener {
         if(e.getSource() == bt_calcularPretamo){
 
            CalculoNivelEndeudamiento();
-           txt_nivelEndeudamiento.getText();
+
+
+        }
+        if(e.getSource() == bt_verPropuestaPrestamo){
            PoliticasPrestamos();
         }
 
     }
 
-    public  void CalculoNivelEndeudamiento(/**double deudaActual, double salario, double capacidadSalarial**/){
+    public  void CalculoNivelEndeudamiento(){
+        String deuda = txt_deudaActual.getText().toString();
+        String sueldo = txt_salario.getText().toString();
 
-        double deudaActual = Double.parseDouble(txt_deudaActual.getText().toString());
-        double salario = Double.parseDouble(txt_salario.getText().toString());
-        double capacidadSalarial = (deudaActual / salario) * 100;
+        if(!deuda.isEmpty() && !sueldo.isEmpty() ){
+            deudaActual = Double.parseDouble(deuda);
+            salario = Double.parseDouble(sueldo);
+            double capacidadSalarial = (deudaActual / salario) * 100;
 
-        txt_nivelEndeudamiento.setText(String.valueOf(capacidadSalarial));
+            txt_nivelEndeudamiento.setText(String.valueOf(df.format(capacidadSalarial)));
+
+        }else{
+            //deudaActual = Double.parseDouble(deuda);
+            //salario = Double.parseDouble(sueldo);
+            if(deuda.isEmpty() && !sueldo.isEmpty() ){
+                JOptionPane.showMessageDialog(null,"Por favor completar el campo DEUDA ACTUAL");
+
+            } if(!deuda.isEmpty() && sueldo.isEmpty() ){
+                JOptionPane.showMessageDialog(null,"Por favor completar el campo SALARIO");
+            } if(deuda.isEmpty() && sueldo.isEmpty() ){
+                JOptionPane.showMessageDialog(null,"Por favor completar los campo DEUDA ACTUAL y SALARIO");
+            }
+
+        }
+
 
 
 
 
     }
-
+    //POLITICAS DE PRESTAMOS ************************************************************************************8
     public void PoliticasPrestamos(){
-            //txt_nivelEndeudamiento.setText("10.00");
-        if(!txt_nivelEndeudamiento.equals("") && !txt_salario.equals("") && !txt_deudaActual.equals("")){
+            nivelEstudio = box_nivelEstudio.getSelectedItem().toString();
+            motivo_prestamo = box_motivoPrestamo.getSelectedItem().toString();
+            String NEndeudamiento = txt_nivelEndeudamiento.getText().toString();
+            String sueldo = txt_salario.getText().toString();
+            String deuda = txt_deudaActual.getText().toString();
+            String tiempoTrabajo = txt_tiempoLaborando.getText().toString();
+
+        if(!NEndeudamiento.isEmpty() && !sueldo.isEmpty() && !deuda.isEmpty() && !nivelEstudio.equals("None") && !motivo_prestamo.equals("None") && !tiempoTrabajo.isEmpty() ){
+
             salario = Double.parseDouble(txt_salario.getText().toString());
             nivelEndeudamiento = Double.parseDouble(txt_nivelEndeudamiento.getText().toString());
             tiempoLaborando = Double.parseDouble(txt_tiempoLaborando.getText().toString());
 
-            if(salario >= 500.00 && salario <= 700.00 && nivelEndeudamiento <= 30.00 && tiempoLaborando <= 12 ){
+
+            if(salario >= 500.00 && salario <= 700.00 && nivelEndeudamiento <= 30.00 && tiempoLaborando <= 18 && tiempoLaborando >=6 && nivelEstudio.equals("Secundaria") && !motivo_prestamo.equals("None") ){
                 txt_interesPrestamo.setText("8.00 % mensual");
                 txt_tiempoAPagarPrestamo.setText("14 meses");
                 txt_PagoCuotas.setText("55.00");
                 txt_MontoSolicitado.setText("1500.00");
 
             }
-            if(salario> 750.00 && salario <= 850 && nivelEndeudamiento <= 30.00 && tiempoLaborando <= 18 ){
+            if(salario > 700.00 && salario <= 850 && nivelEndeudamiento <= 30.00 && tiempoLaborando <= 24 && tiempoLaborando>=19 && nivelEstudio.equals("Secundaria") && !motivo_prestamo.equals("None")){
                 txt_interesPrestamo.setText("10.00 mensual");
                 txt_tiempoAPagarPrestamo.setText("18 meses");
                 txt_PagoCuotas.setText("75.00");
                 txt_MontoSolicitado.setText("2500.00");
+
+            }
+            if(salario > 700.00 && salario <= 850 && nivelEndeudamiento <= 30.00 && tiempoLaborando <= 24 && tiempoLaborando>=19 && nivelEstudio.equals("Universidad") && !motivo_prestamo.equals("None")){
+                txt_interesPrestamo.setText("10.00 mensual");
+                txt_tiempoAPagarPrestamo.setText("24 meses");
+                txt_PagoCuotas.setText("95.00");
+                txt_MontoSolicitado.setText("4000.00");
+
+            }if(salario > 850.00 && salario <= 1300 && nivelEndeudamiento <= 30.00 && tiempoLaborando <= 24 && tiempoLaborando>=19 && nivelEstudio.equals("Secundaria") && !motivo_prestamo.equals("None")){
+                txt_interesPrestamo.setText("9.85 mensual");
+                txt_tiempoAPagarPrestamo.setText("36 meses");
+                txt_PagoCuotas.setText("125.00");
+                txt_MontoSolicitado.setText("6500.00");
+
+            }
+        }else{
+            if(!NEndeudamiento.isEmpty() && sueldo.isEmpty() && !deuda.isEmpty() && !nivelEstudio.equals("None") && !motivo_prestamo.equals("None")){
+
+                        JOptionPane.showMessageDialog(null,"Por favor completar el campo SALARIO");
+            }
+            if(!NEndeudamiento.isEmpty() && !sueldo.isEmpty() && deuda.isEmpty() && !nivelEstudio.equals("None") && !motivo_prestamo.equals("None")){
+
+                JOptionPane.showMessageDialog(null,"Por favor completar el campo DEUDA ACTUAL");
+
+            }if(!NEndeudamiento.isEmpty() && !sueldo.isEmpty() && !deuda.isEmpty() && nivelEstudio.equals("None") && !motivo_prestamo.equals("None")){
+
+                JOptionPane.showMessageDialog(null,"Por favor completar el campo NIVEL ESTUDIO");
+            }if(!NEndeudamiento.isEmpty() && !sueldo.isEmpty() && !deuda.isEmpty() && !nivelEstudio.equals("None") && motivo_prestamo.equals("None")){
+
+                JOptionPane.showMessageDialog(null,"Por favor completar el campo MOTIVO PRESTAMO");
+
+            }if(!NEndeudamiento.isEmpty() && !sueldo.isEmpty() && !deuda.isEmpty() && !nivelEstudio.equals("None") && !motivo_prestamo.equals("None") && tiempoTrabajo.isEmpty()){
+
+                JOptionPane.showMessageDialog(null,"Por favor completar el campo TIEMPO LABORANDO");
 
             }
         }
